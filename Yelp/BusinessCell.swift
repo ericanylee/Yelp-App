@@ -36,6 +36,13 @@ class BusinessCell: UITableViewCell {
         thumbimageView.layer.cornerRadius = 5 // make image rounder
         thumbimageView.clipsToBounds = true //clip to bitmap?
     
+        nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width // To make sure namelabel doesn't truncate
+    }
+    
+    override func layoutSubviews() { // for horizontal rotation
+        super.layoutSubviews()
+        
+        nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width // To make sure namelabel doesn't truncate
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
