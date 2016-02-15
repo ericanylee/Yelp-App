@@ -25,10 +25,20 @@ class detailViewController: UIViewController {
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: infoView.frame.origin.y + infoView.frame.size.height+50)
         restaurantImageView.setImageWithURL(business.imageURL!)
         nameLabel.text = business.name
-        numberLabel.text = "Number : " + business.number!
-        menuLabel.text = "Menu provider : " + business.menu!
+        if business.number != nil {
+            numberLabel.text = "Number : " + business.number!
+        }
+        if business.menu != nil{
+            menuLabel.text = "Menu provider : " + business.menu!
+        }
         
-        dealLabel.text = business.deals
+        if business.deals != nil{
+            dealLabel.text = business.deals
+        }
+        
+        numberLabel.sizeToFit()
+        numberLabel.sizeToFit()
+        dealLabel.sizeToFit()
         
         restaurantImageView.layer.cornerRadius = 5 // make image rounder
         restaurantImageView.clipsToBounds = true //clip to bitmap?
