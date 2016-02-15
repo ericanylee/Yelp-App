@@ -16,7 +16,9 @@ class Business: NSObject {
     let distance: String?
     let ratingImageURL: NSURL?
     let reviewCount: NSNumber?
-    
+    let number: String?
+    let menu: String?
+    let deals: String?
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
         
@@ -57,6 +59,20 @@ class Business: NSObject {
             categories = nil
         }
         
+        let dealsArray = dictionary["deals"] as? [[String]]
+        if dealsArray != nil{
+            
+            var dealNames = [String]()
+            for deal in dealsArray!{
+                let dealName = deal[0]
+                dealNames.append(dealName)
+            }
+            deals = dealNames.joinWithSeparator(", ")
+        } else {
+            deals = nil
+        }
+        
+        
         let distanceMeters = dictionary["distance"] as? NSNumber
         if distanceMeters != nil {
             let milesPerMeter = 0.000621371
@@ -72,7 +88,14 @@ class Business: NSObject {
             ratingImageURL = nil
         }
         
+        number = dictionary["display_phone"] as? String
+
+        menu = dictionary["menu_provider"] as? String
+        
         reviewCount = dictionary["review_count"] as? NSNumber
+        
+        
+        
     }
     
     class func businesses(array array: [NSDictionary]) -> [Business] {

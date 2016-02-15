@@ -75,11 +75,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
             if let searchTerm = searchController.searchBar.text{
+                if !searchTerm.isEmpty{
                 Business.searchWithTerm(searchTerm, completion: { (businesses: [Business]!, error: NSError!) -> Void in
                     self.businesses = businesses
                     self.tableView.reloadData()
                 })
                 tableView.reloadData()
+                }
         }
         
     }
@@ -137,14 +139,25 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let cell = sender as! BusinessCell
+        let indexPath = tableView.indexPathForCell(cell)
+        let business = businesses[indexPath!.row]
+        
+        //only called when going forward, not backward
+        //if you do option + press detailViewController.. can see its type
+        let DetailViewController = segue.destinationViewController as! detailViewController
+        
+        DetailViewController.business = business
+    
+    
     }
-    */
+    
 
 }
