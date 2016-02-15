@@ -17,21 +17,11 @@ class BusinessCell: UITableViewCell {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var thumbimageView: UIImageView!
-    
-    var business: Business!{
-        didSet{//whenever business changes, we automatically set it
-            nameLabel.text = business.name
-            thumbimageView.setImageWithURL(business.imageURL!)
-            categoryLabel.text = business.categories
-            addressLabel.text = business.address
-            reviewsCountLabel.text = "\(business.reviewCount!) Reviews"
-            ratingImageView.setImageWithURL(business.ratingImageURL!)
-            distanceLabel.text = business.distance
-        }
-    }
-    
+    var business: Business!
+ 
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
         thumbimageView.layer.cornerRadius = 5 // make image rounder
         thumbimageView.clipsToBounds = true //clip to bitmap?
